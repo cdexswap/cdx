@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0a0f;
+  --foreground: #ffffff;
+  --primary: #6366f1;
+  --primary-light: #a5b4fc;
+  --secondary: #8b5cf6;
+  --secondary-light: #c4b5fd;
+  --accent: #f59e0b;
+  --dark: #111827;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer base {
+  body {
+    @apply antialiased;
+    background-color: var(--background);
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto;
+  }
+  
+  .card-glass {
+    @apply backdrop-blur-xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 shadow-xl transition-all duration-300;
+  }
+  
+  .card-glass-darker {
+    @apply backdrop-blur-xl bg-gradient-to-br from-black/40 to-black/30 border border-white/10 shadow-lg transition-all duration-300;
+  }
+  
+  .btn-gradient {
+    @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 bg-size-200 animate-gradient-x hover:shadow-lg hover:from-indigo-500 hover:to-purple-500 transition-all duration-300;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300;
+  }
+  
+  .bg-radial-gradient {
+    background: radial-gradient(circle at center, #111827 0%, #0a0a0f 70%);
+  }
+  
+  .bg-radial-gradient-center {
+    background: radial-gradient(circle at center, #6366f1 0%, transparent 70%);
+  }
+}
+
+@layer utilities {
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .responsive-text {
+    @apply text-base sm:text-lg lg:text-xl;
+  }
+
+  .mobile-spacing {
+    @apply space-y-4 sm:space-y-6 lg:space-y-8;
+  }
+
+  .noise-texture {
+    background-image: url('/noise.png');
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+  }
+
+  .bg-size-200 {
+    background-size: 200% auto;
+  }
+  
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+  
+  .animate-gradient-x {
+    background-size: 200% auto;
+    animation: gradient-x 15s linear infinite;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5),
+                 0 0 40px rgba(99, 102, 241, 0.3),
+                 0 0 60px rgba(99, 102, 241, 0.2);
+  }
+
+  .hover\:shadow-glow:hover {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.25),
+                0 0 60px rgba(139, 92, 246, 0.15),
+                inset 0 0 20px rgba(139, 92, 246, 0.1);
+  }
+
+  .scale-102 {
+    transform: scale(1.02);
+  }
+  
+  .hover\:scale-102:hover {
+    transform: scale(1.02);
+  }
+
+  .primary-glow {
+    background: var(--primary);
+  }
+  
+  .secondary-glow {
+    background: var(--secondary);
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s infinite linear;
+    background-size: 200% 100%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.7);
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, transform, opacity, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Animations */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: -3s;
+  will-change: transform;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
